@@ -11,7 +11,7 @@
 20 * * * * node /scripts/jd_gyec.js >> /scripts/logs/jd_gyec.log 2>&1
 
 # 超级直播间红包雨
-30,31 20-23/1 25 1 * node /scripts/jd_live_redrain.js >> /scripts/logs/jd_live_redrain.log 2>&1
+30,31 20-23/1 * 1 * node /scripts/jd_live_redrain.js >> /scripts/logs/jd_live_redrain.log 2>&1
 
 # 直播间红包雨
 0,1 19-21/1 * * * node /scripts/jd_live_redrain2.js >> /scripts/logs/jd_live_redrain2.log 2>&1
