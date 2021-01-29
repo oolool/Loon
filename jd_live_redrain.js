@@ -2,23 +2,23 @@
 超级直播间红包雨
 每天20-23半点可领
 活动时间：2021年1月25日
-更新地址：https://raw.githubusercontent.com/shylocks/Loon/main/jd_live_redrain.js
+更新地址：https://raw.githubusercontent.com/Tartarus2014/Script/master/jd_live_redrain.js
 已支持IOS双京东账号, Node.js支持N个京东账号
 脚本兼容: QuantumultX, Surge, Loon, 小火箭，JSBox, Node.js
 ============Quantumultx===============
 [task_local]
 #超级直播间红包雨
-30,31 20-23/1 25 1 * https://raw.githubusercontent.com/shylocks/Loon/main/jd_live_redrain.js, tag=超级直播间红包雨, img-url=https://raw.githubusercontent.com/yogayyy/Scripts/master/Icon/shylocks/jd_live_redrain2.jpg, enabled=true
+30,31 20-23/1 28 1 * https://raw.githubusercontent.com/Tartarus2014/Script/master/jd_live_redrain.js, tag=超级直播间红包雨, img-url=https://raw.githubusercontent.com/yogayyy/Scripts/master/Icon/shylocks/jd_live_redrain2.jpg, enabled=true
 
 ================Loon==============
 [Script]
-cron "30,31 20-23/1 25 1 *" script-path=https://raw.githubusercontent.com/shylocks/Loon/main/jd_live_redrain.js, tag=超级直播间红包雨
+cron "30,31 20-23/1 28 1 *" script-path=https://raw.githubusercontent.com/Tartarus2014/Script/master/jd_live_redrain.js, tag=超级直播间红包雨
 
 ===============Surge=================
-超级直播间红包雨 = type=cron,cronexp="30,31 20-23/1 25 1 *",wake-system=1,timeout=200,script-path=https://raw.githubusercontent.com/shylocks/Loon/main/jd_live_redrain.js
+超级直播间红包雨 = type=cron,cronexp="30,31 20-23/1 28 1 *",wake-system=1,timeout=200,script-path=https://raw.githubusercontent.com/Tartarus2014/Script/master/jd_live_redrain.js
 
 ============小火箭=========
-超级直播间红包雨 = type=cron,script-path=https://raw.githubusercontent.com/shylocks/Loon/main/jd_live_redrain.js, cronexpr="30,31 20-23/1 25 1 *", timeout=200, enable=true
+超级直播间红包雨 = type=cron,script-path=https://raw.githubusercontent.com/Tartarus2014/Script/master/jd_live_redrain.js, cronexpr="30,31 20-23/1 28 1 *", timeout=200, enable=true
  */
 const $ = new Env('超级直播间红包雨');
 
@@ -45,10 +45,6 @@ if ($.isNode()) {
 }
 const JD_API_HOST = 'https://api.m.jd.com/api';
 let ids = {
-  '20': 'RRA3q6FQPT9BKg4C6EyhA99TcA9K7SL',
-  '21': 'RRA42SucXFqAPggaoYP4c3JYZLHGbkG',
-  '22': 'RRAPZRA9mVCzpjH38RUBPseJiZ6oj8',
-  '23': 'RRA4AmPxr1Qv1vTDpFgNS57rjn1mjGQ',
 }
 !(async () => {
   if (!cookiesArr[0]) {
@@ -113,7 +109,7 @@ function showMsg() {
 }
 
 function getRedRain() {
-  let body = 'body=%7B%22liveId%22%3A%223384829%22%7D&build=167515&client=apple&clientVersion=9.3.5&openudid=53f4d9c70c1c81f1c8769d2fe2fef0190a3f60d2&screen=1242*2208&sign=0f4e529155e027f3367382cf86726253&st=1611576880286&sv=102'
+  let body = 'area=12_904_908_57903&body=%7B%22liveId%22%3A%223417821%22%7D&build=167515&client=apple&clientVersion=9.3.5&d_brand=apple&d_model=iPhone10%2C2&eid=eidIF3CF0112RTIyQTVGQTEtRDVCQy00Qg%3D%3D6HAJa9%2B/4Vedgo62xKQRoAb47%2Bpyu1EQs/6971aUvk0BQAsZLyQAYeid%2BPgbJ9BQoY1RFtkLCLP5OMqU&isBackground=N&joycious=213&lang=zh_CN&networkType=wifi&networklibtype=JDNetworkBaseAF&openudid=53f4d9c70c1c81f1c8769d2fe2fef0190a3f60d2&osVersion=14.2&partner=apple&rfs=0000&scope=01&screen=1242%2A2208&sign=4d8419f9f5bd796c1a55848897f48479&st=1611835851756&sv=122&uts=0f31TVRjBSsi%2BYU1cSFHfA3iu0XA1puLqsTJsh2VcNVvz%2Ba7wt4CacHBt5NCqjQxR/OhG%2B5LYUMIkvMi6akthXrcERFnMOmZxjMCgF6H49GSc7JP4w91oe9CHXwlpO18NOwUVZ1WGmpyVAUFPUcHBg2H441JlBe8vMeMm4IIs2CspY4Bae%2BbPAFwpu10pJuaxpD56YSEVZzf4gqzHQ%2Bhvg%3D%3D&uuid=hjudwgohxzVu96krv/T6Hg%3D%3D&wifiBssid=unknown'
   return new Promise(resolve => {
     $.post(taskPostUrl('liveActivityV842', body), (err, resp, data) => {
       try {
