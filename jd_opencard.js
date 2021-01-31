@@ -1,3 +1,6 @@
+
+BODY
+raw 
 /*
 开卡活动
 活动入口：https://u.jd.com/w6srT2x
@@ -8,7 +11,7 @@ const $ = new Env('开卡活动');
 const notify = $.isNode() ? require('./sendNotify') : '';
 //Node.js用户请在jdCookie.js处填写京东ck;
 const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
-let configList = ["59ba253bfb744a27a0cfa93cf3d71c25"]
+let configList = ["52167be23920439085d1b9fff7410efe"]
 let configCode = ''
 //IOS等用户直接用NobyDa的jd cookie
 let cookiesArr = [], cookie = '', message;
