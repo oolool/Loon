@@ -57,7 +57,6 @@ function Update_Cron {
     else
       RanHour=$((${RANDOM} % 7 + 13))
     fi
-    #perl -i -pe "{s|30 8-20/4(.+jd_nian\W*.*)|28 8-20/4,21\1|; s|.+(bash git_pull.+)|${RanMin} ${RanHour} \* \* \* \1|}" ${ListCron} # 修改默认错误的cron
     perl -i -pe "{s|30 8-20/4(.+jd_nian\W*.*)|28 8-20/4,21\1|; s|.+(bash diy_pull.+)|0 \* \* \* \* \1|}" ${ListCron} # 修改默认错误的cron
     crontab ${ListCron}
   fi
