@@ -2,10 +2,10 @@
 1 8,9 14-31/1 1 * node /scripts/jd_bj.js >> /scripts/logs/jd_bj.log 2>&1
 
 # 源头好物红包
-0 0 * * *  node /scripts/jd_coupon.js >> /scripts/logs/jd_coupon.log 2>&1
+# 0 0 * * *  node /scripts/jd_coupon.js >> /scripts/logs/jd_coupon.log 2>&1
 
 # 京东手机年终奖
-15 0 * * * node /scripts/jd_festival.js >> /scripts/logs/jd_festival.log 2>&1
+# 15 0 * * * node /scripts/jd_festival.js >> /scripts/logs/jd_festival.log 2>&1
 
 # 超级直播间红包雨
 30,31 20-23/1 * 1 * node /scripts/jd_live_redrain.js >> /scripts/logs/jd_live_redrain.log 2>&1
@@ -26,10 +26,10 @@
 0 0,9,11,13,15,17,19,20,21,22,23 * * * node /scripts/jd_live_redrain_offical.js >> /scripts/logs/jd_live_redrain_offical.log 2>&1
 
 # 盲盒抽京豆
-1 7 * * * node /scripts/jd_mh.js >> /scripts/logs/jd_mh.log 2>&1
+# 1 7 * * * node /scripts/jd_mh.js >> /scripts/logs/jd_mh.log 2>&1
 
 # 京东秒秒币
-10 7 * * * node /scripts/jd_ms.js >> /scripts/logs/jd_ms.log 2>&1
+# 10 7 * * * node /scripts/jd_ms.js >> /scripts/logs/jd_ms.log 2>&1
 
 # 超级直播间任务赢京豆
 40 21 * * * node /scripts/jd_super.js >> /scripts/logs/jd_super.log 2>&1
@@ -44,4 +44,4 @@
 10 0 * * * node /scripts/jd_wechat_sign.js >> /scripts/logs/jd_wechat_sign.log 2>&1
 
 # 小鸽有礼
-5 7 * * * node /scripts/jd_xg.js >> /scripts/logs/jd_xg.log 2>&1
+# 5 7 * * * node /scripts/jd_xg.js >> /scripts/logs/jd_xg.log 2>&1
