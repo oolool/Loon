@@ -1,6 +1,3 @@
-
-BODY
-raw 
 /*
 开卡活动
 活动入口：https://u.jd.com/w6srT2x
