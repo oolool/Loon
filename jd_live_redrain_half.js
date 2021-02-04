@@ -138,10 +138,10 @@ function showMsg() {
 }
 
 function getRedRain() {
+
   return new Promise(resolve => {
     $.get({
-      url: "https://gitee.com/shylocks/updateTeam/raw/main/jd_live_redRain_half.json?" + Date.now(),
-      // url: "http://qn6l5d6wm.hn-bkt.clouddn.com/jd_live_redRain_half.json?" + Date.now(),
+      url: "http://qn6l5d6wm.hn-bkt.clouddn.com/jd_live_redRain_half.json?" + Date.now(),
     }, (err, resp, data) => {
       try {
         if (err) {
