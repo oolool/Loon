@@ -57,8 +57,8 @@ function Update_Cron {
     else
       RanHour=$((${RANDOM} % 7 + 13))
     fi
-    perl -i -pe "{s|30 8-20/4(.+jd_nian\W*.*)|28 8-20/4,21\1|; s|.+(bash diy_pull.+)|0 \* \* \* \* \1|}" ${ListCron} # 修改默认错误的cron
-    crontab ${ListCron}
+    # perl -i -pe "{s|30 8-20/4(.+jd_nian\W*.*)|28 8-20/4,21\1|; s|.+(bash diy_pull.+)|\* \* \* \* \* \1|}" ${ListCron} # 修改默认错误的cron
+    # crontab ${ListCron}
   fi
 }
 
@@ -254,7 +254,7 @@ function Output_ListJsAdd {
 
 ## 输出是否有失效的定时任务
 function Output_ListJsDrop {
-  if [ ${ExitStatusScripts} -eq 0 ] && [ -s ${ListJsDrop} ]; then
+  if [[ ${ExitStatusScripts} -eq 0 ]] && [ -s ${ListJsDrop} ]; then
     echo -e "检测到有失效的定时任务：\n"
     cat ${ListJsDrop}
     echo
@@ -340,10 +340,10 @@ echo -e "JS脚本目录：${ScriptsDir}\n"
 echo -e "--------------------------------------------------------------\n"
 
 ## 更新shell脚本、检测配置文件版本并将sample/config.sh.sample复制到config目录下
-Git_PullShell && Update_Cron
+Update_Cron
 VerConfSample=$(grep " Version: " ${FileConfSample} | perl -pe "s|.+v((\d+\.?){3})|\1|")
 [ -f ${FileConf} ] && VerConf=$(grep " Version: " ${FileConf} | perl -pe "s|.+v((\d+\.?){3})|\1|")
-if [ ${ExitStatusShell} -eq 0 ]
+if [[ ${ExitStatusShell} -eq 0 ]]
 then
   echo -e "\nshell脚本更新完成...\n"
   if [ -n "${JD_DIR}" ] && [ -d ${ConfigDir} ]; then
@@ -354,7 +354,7 @@ else
 fi
 
 ## 克隆或更新js脚本
-if [ ${ExitStatusShell} -eq 0 ]; then
+if [[ ${ExitStatusShell} -eq 0 ]]; then
   echo -e "--------------------------------------------------------------\n"
   [ -f ${ScriptsDir}/package.json ] && PackageListOld=$(cat ${ScriptsDir}/package.json)
   [ -d ${ScriptsDir}/.git ] && Git_PullScripts || Git_CloneScripts
