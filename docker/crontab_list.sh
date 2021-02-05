@@ -30,3 +30,6 @@
 
 # 京东粉丝专享
 10 0 * * * node /scripts/jd_wechat_sign.js >> /scripts/logs/jd_wechat_sign.log 2>&1
+
+# 京东赚京豆
+0 8,10 * * * node /scripts/jd_xcx_zjd.js >> /scripts/logs/jd_xcx_zjd.log 2>&1
