@@ -75,7 +75,7 @@ async function start() {
   await getInfo();
   if(shopToken && shopToken.code == 200) {
     for (let item of shopToken.data) {
-      const vender = await getVenderId(item.token)
+      const vender = await getVenderId(item)
       num++;
       if (vender.code == 402) {continue;}
       await getActivityInfo(item.token, vender.data.venderId)
@@ -110,10 +110,10 @@ function getShopToken() {
           })
 }
 
-function getVenderId(token) {
+function getVenderId(item) {
     return new Promise(resolve => {
         const options = {
-            url: `https://api.m.jd.com/api?appid=interCenter_shopSign&t=${Date.now()}&loginType=2&functionId=interact_center_shopSign_getActivityInfo&body={%22token%22:%22${token}%22,%22venderId%22:%22%22}&jsonp=jsonp1000`,
+            url: `https://api.m.jd.com/api?appid=interCenter_shopSign&t=${Date.now()}&loginType=2&functionId=interact_center_shopSign_getActivityInfo&body={%22token%22:%22${item.token}%22,%22venderId%22:%22%22}&jsonp=jsonp1000`,
             headers: {
               "accept": "*/*",
               "accept-encoding": "gzip, deflate, br",
@@ -132,8 +132,8 @@ function getVenderId(token) {
                 // console.log(data)
                 data = JSON.parse(/{(.*)}/g.exec(data)[0])
                 if (data.code == 402) {
-                  console.log(`第`+num+`个店铺签到活动已失效`)
-                  notice +=`第`+num+`个店铺签到活动已失效\n`
+                  console.log(`[${item.name}]签到活动已失效`)
+                  notice +=`[${item.name}]签到活动已失效\n`
                 }else{
                   vender = data.data.venderId
                 }
@@ -230,8 +230,8 @@ function shopSign(item, venderId) {
           } else {
               // console.log(JSON.stringify(data))
               data = JSON.parse(/{(.*)}/g.exec(data)[0])
-              console.log(`第`+num+`个店铺${item.name}已签到：`+data.data.days+`天`)
-              notice +=`第`+num+`个店铺已签到：`+data.data.days+`天\n`
+              console.log(`[${item.name}]已签到：`+data.data.days+`天`)
+              notice +=`[${item.name}]已签到：`+data.data.days+`天\n`
           }
         } catch (e) {
           $.logErr(e, resp);
