@@ -73,13 +73,11 @@ if ($.isNode()) {
 async function start() {
   $.earn = 0
   await getInfo();
-
-  // const result = await getShopToken()
   if(shopToken && shopToken.code == 200) {
     for (let item of shopToken.data) {
       const vender = await getVenderId(item.token)
       num++;
-      if (vender.code == 402) {return true}
+      if (vender.code == 402) {continue;}
       await getActivityInfo(item.token, vender.data.venderId)
       await signCollectGift(item.token, vender.data.venderId, activityId)
       await shopSign(item, vender.data.venderId) 
@@ -247,7 +245,7 @@ function shopSign(item, venderId) {
 async function showMsg() {
   if ($.isNode()) {
     await notify.sendNotify(`${$.name} - 账号${$.index}`, notice);
-    notice =''
+    notice = ''
   }
 }
 
@@ -270,33 +268,6 @@ function getInfo() {
     })
   })
 }
-
-function doTask(taskId) {
-  let body = `taskid=${taskId}`
-  return new Promise(resolve => {
-    $.get(taskUrl('family_task', body), async (err, resp, data) => {
-      try {
-        if (err) {
-          console.log(`${err},${jsonParse(resp.body)['message']}`)
-          console.log(`${$.name} API请求失败，请检查网路重试`)
-        } else {
-          data = JSON.parse(data.match(/query\((.*)\n/)[1])
-          if (data.ret === 0) {
-            console.log(`任务完成成功`)
-          } else {
-            console.log(`任务完成失败，原因未知`)
-            $.canDo = false
-          }
-        }
-      } catch (e) {
-        $.logErr(e, resp)
-      } finally {
-        resolve(data);
-      }
-    })
-  })
-}
-
 
 function TotalBean() {
   return new Promise(async resolve => {
