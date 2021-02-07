@@ -11,6 +11,10 @@ const JD_API_HOST = 'https://api.m.jd.com/api?appid=interCenter_shopSign';
 //Node.js用户请在jdCookie.js处填写京东ck;
 //IOS等用户直接用NobyDa的jd cookie
 let cookiesArr = [], cookie = '', message;
+let activityId = ''
+let notice = ''
+let num = 0
+let shopToken = {}
 
 if ($.isNode()) {
   Object.keys(jdCookieNode).forEach((item) => {
@@ -33,6 +37,7 @@ if ($.isNode()) {
     $.msg($.name, '【提示】请先获取京东账号一cookie\n直接使用NobyDa的京东签到获取', 'https://bean.m.jd.com/bean/signIndex.action', {"open-url": "https://bean.m.jd.com/bean/signIndex.action"});
     return;
   }
+  shopToken = await getShopToken()
   for (let i = 0; i < cookiesArr.length; i++) {
     if (cookiesArr[i]) {
       cookie = cookiesArr[i];
@@ -53,7 +58,8 @@ if ($.isNode()) {
         }
         continue
       }
-      await shopSign()
+      await start()
+      num = 0
     }
   }
 })()
@@ -64,31 +70,25 @@ if ($.isNode()) {
     $.done();
   })
 
-async function shopSign() {
+async function start() {
   $.earn = 0
   await getInfo();
-  await sign();
-  await showMsg();
-}
 
-function sign() {
-    return new Promise(resolve => {
-        const result = await getShopToken()
-        if(result && result.code == 200) {
-            result.data.forEach(item => {
-                const vender = await getVenderId(item.token)
-                if (vender.code == 402) continue
-                await getActivityInfo(item.token, vender.data.venderId)
-                await signCollectGift(item.token, vender.data.venderId, activityId)
-                await taskUrl(item.token, vender.data.venderId) 
-            });
-        }
-        resolve();
-    })
+  // const result = await getShopToken()
+  if(shopToken && shopToken.code == 200) {
+    for (let item of shopToken.data) {
+      const vender = await getVenderId(item.token)
+      num++;
+      if (vender.code == 402) {return true}
+      await getActivityInfo(item.token, vender.data.venderId)
+      await signCollectGift(item.token, vender.data.venderId, activityId)
+      await shopSign(item.token, vender.data.venderId) 
+    }
+  }
+  // await showMsg();
 }
 
 function getShopToken() {
-    return new Promise(resolve => {
         return new Promise(async resolve => {
             $.get({url: `http://106.13.212.194/jd/activity/shopSign/getToken/`, timeout: 10000}, (err, resp, data) => {
               try {
@@ -110,7 +110,6 @@ function getShopToken() {
             await $.wait(15000);
             resolve()
           })
-    })
 }
 
 function getVenderId(token) {
@@ -182,11 +181,11 @@ function getActivityInfo(token, venderId) {
     })
 }
 
-function signCollectGift() {
+function signCollectGift(token, venderId, activityId) {
     return new Promise(resolve => {
         const options = {
-            url: `${JD_API_HOST}&t=${Date.now()}&loginType=2&functionId=interact_center_shopSign_signCollectGift&body={%22token%22:%22${token}%22,%22venderId%22:688200,%22activityId%22:${activitytemp},%22type%22:56,%22actionType%22:7}&jsonp=jsonp1004`,
-            headers: {
+          url: `${JD_API_HOST}&t=${Date.now()}&loginType=2&functionId=interact_center_shopSign_signCollectGift&body={%22token%22:%22${token}%22,%22venderId%22:688200,%22activityId%22:${activityId},%22type%22:56,%22actionType%22:7}&jsonp=jsonp1004`,
+          headers: {
               "accept": "accept",
               "accept-encoding": "gzip, deflate",
               "accept-language": "zh-CN,zh;q=0.9,en-US;q=0.8,en;q=0.7",
@@ -201,7 +200,6 @@ function signCollectGift() {
                 console.log(`\n${$.name}: API查询请求失败 ‼️‼️`)
                 $.logErr(err);
               } else {
-                // console.log(data)
                 data = JSON.parse(/{(.*)}/g.exec(data)[0])
               }
             } catch (e) {
@@ -232,7 +230,7 @@ function shopSign(token, venderId) {
             console.log(`\n${$.name}: API查询请求失败 ‼️‼️`)
             $.logErr(err);
           } else {
-              // console.log(data)
+              // console.log(JSON.stringify(data))
               data = JSON.parse(/{(.*)}/g.exec(data)[0])
               console.log(`第`+num+`个店铺已签到：`+data.data.days+`天`)
               notice +=`第`+num+`个店铺已签到：`+data.data.days+`天\n`
@@ -246,12 +244,11 @@ function shopSign(token, venderId) {
     })
   }
 
-function showMsg() {
-  return new Promise(resolve => {
-    message += `本次运行获得${$.earn}积分，共计${$.total}积分`
-    $.log($.name, '', `京东账号${$.index}${$.nickName}\n${message}`);
-    resolve()
-  })
+async function showMsg() {
+  if ($.isNode()) {
+    await notify.sendNotify(`${$.name} - 账号${$.index}`, notice);
+    notice =''
+  }
 }
 
 function getInfo() {
