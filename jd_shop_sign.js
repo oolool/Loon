@@ -82,7 +82,7 @@ async function start() {
       if (vender.code == 402) {return true}
       await getActivityInfo(item.token, vender.data.venderId)
       await signCollectGift(item.token, vender.data.venderId, activityId)
-      await shopSign(item.token, vender.data.venderId) 
+      await shopSign(item, vender.data.venderId) 
     }
   }
   // await showMsg();
@@ -211,10 +211,10 @@ function signCollectGift(token, venderId, activityId) {
     })
 }
 
-function shopSign(token, venderId) {
+function shopSign(item, venderId) {
     return new Promise(resolve => {
       const options = {
-        url: `${JD_API_HOST}&t=${Date.now()}&loginType=2&functionId=interact_center_shopSign_getSignRecord&body={%22token%22:%22${token}%22,%22venderId%22:${venderId},%22activityId%22:${activityId},%22type%22:56}&jsonp=jsonp1006`,
+        url: `${JD_API_HOST}&t=${Date.now()}&loginType=2&functionId=interact_center_shopSign_getSignRecord&body={%22token%22:%22${item.token}%22,%22venderId%22:${venderId},%22activityId%22:${activityId},%22type%22:56}&jsonp=jsonp1006`,
         headers: {
           "accept": "application/json",
           "accept-encoding": "gzip, deflate, br",
@@ -232,7 +232,7 @@ function shopSign(token, venderId) {
           } else {
               // console.log(JSON.stringify(data))
               data = JSON.parse(/{(.*)}/g.exec(data)[0])
-              console.log(`第`+num+`个店铺已签到：`+data.data.days+`天`)
+              console.log(`第`+num+`个店铺${item.name}已签到：`+data.data.days+`天`)
               notice +=`第`+num+`个店铺已签到：`+data.data.days+`天\n`
           }
         } catch (e) {
