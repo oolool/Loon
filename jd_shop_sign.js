@@ -105,8 +105,6 @@ function getShopToken() {
                 resolve(data);
               }
             })
-            await $.wait(15000);
-            resolve()
           })
 }
 
