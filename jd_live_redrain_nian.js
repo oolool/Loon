@@ -44,9 +44,13 @@ if ($.isNode()) {
 }
 const JD_API_HOST = 'https://api.m.jd.com/api';
 let ids = {
+  '0': 'RRA3S6TRRbnNNuGN43oHMA5okbcXmRY',
+  '9': 'RRA3S6TRRbnNNuGN43oHMA5okbcXmRY',
   '19': 'RRA3S6TRRbnNNuGN43oHMA5okbcXmRY',
   '20': 'RRA3S6TRRbnNNuGN43oHMA5okbcXmRY',
-  '21': 'RRA3S6TRRbnNNuGN43oHMA5okbcXmRY'
+  '21': 'RRA3S6TRRbnNNuGN43oHMA5okbcXmRY',
+  '22': 'RRA3S6TRRbnNNuGN43oHMA5okbcXmRY',
+  '23': 'RRA3S6TRRbnNNuGN43oHMA5okbcXmRY'
 }
 !(async () => {
   if (!cookiesArr[0]) {
@@ -113,7 +117,7 @@ function showMsg() {
 function getRedRain() {
   return new Promise(resolve => {
     $.get({
-      url: "http://106.13.212.194/jd/activity/live/redNian/get/" + ((new Date().getUTCHours() + 8) % 24),
+      url: "http://106.13.212.194/jd/activity/live/redNian/get?" + Date.now(),
     }, (err, resp, data) => {
       try {
         if (err) {
