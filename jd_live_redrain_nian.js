@@ -44,7 +44,9 @@ if ($.isNode()) {
 }
 const JD_API_HOST = 'https://api.m.jd.com/api';
 let ids = {
-  '19': 'RRA3S6TRRbnNNuGN43oHMA5okbcXmRY'
+  '19': 'RRA3S6TRRbnNNuGN43oHMA5okbcXmRY',
+  '20': 'RRA3S6TRRbnNNuGN43oHMA5okbcXmRY',
+  '21': 'RRA3S6TRRbnNNuGN43oHMA5okbcXmRY'
 }
 !(async () => {
   if (!cookiesArr[0]) {
@@ -56,7 +58,7 @@ let ids = {
   let nowTs = new Date().getTime()
   if (!($.st <= nowTs && nowTs < $.ed)) {
     $.log(`远程红包雨配置获取错误，从本地读取配置`)
-    let hour = (new Date().getUTCHours() + 8) %24
+    let hour = (new Date().getUTCHours() + 8) % 24
     if (ids[hour]){
       $.activityId = ids[hour]
       $.log(`本地红包雨配置获取成功`)
@@ -111,7 +113,7 @@ function showMsg() {
 function getRedRain() {
   return new Promise(resolve => {
     $.get({
-      url: "http://qn6l5d6wm.hn-bkt.clouddn.com/jd_live_redRain_nian.json?" + Date.now(),
+      url: "http://106.13.212.194/jd/activity/live/redNian/get/" + ((new Date().getUTCHours() + 8) % 24),
     }, (err, resp, data) => {
       try {
         if (err) {
