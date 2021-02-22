@@ -285,6 +285,18 @@ function Del_Cron {
   fi
 }
 
+## 调用用户自定义的diy.sh
+function ExecDiy {
+  if [ "${EnableExtraShell}" = "true" ]; then
+    if [ -f ${FileDiy} ]
+    then
+      . ${FileDiy}
+    else
+      echo -e "${FileDiy} 文件不存在，跳过执行DIY脚本...\n"
+    fi
+  fi
+}
+
 ## 自动增加新的定时任务，需要5个条件：1.AutoAddCron 设置为 true；2.正常更新js脚本，没有报错；3.js-add.list不为空；4.crontab.list存在并且不为空；5.已经正常运行过npm install
 ## 检测文件：LXK9301/jd_scripts 仓库中的 docker/crontab_list.sh，和 shylocks/Loon 仓库中的 docker/crontab_list.sh
 ## 如果检测到检测文件中增加新的定时任务，那么在本地也增加
@@ -363,15 +375,6 @@ if [[ ${ExitStatusShell} -eq 0 ]]; then
   cp -rf ${Scripts2Dir}/diy_pull.sh ${ConfigDir}
 fi
 
-if [ "${EnableExtraShell}" = "true" ]; then
-  if [ -f ${FileDiy} ]
-  then
-    . ${FileDiy}
-  else
-    echo -e "${FileDiy} 文件不存在，跳过执行DIY脚本...\n"
-  fi
-fi
-
 ## 执行各函数
 if [[ ${ExitStatusScripts} -eq 0 ]]
 then
@@ -380,6 +383,7 @@ then
   [ -d ${ScriptsDir}/node_modules ] && Notify_Version
   Diff_Cron
   Npm_Install
+  ExecDiy
   Output_ListJsAdd
   Output_ListJsDrop
   Del_Cron
@@ -389,7 +393,7 @@ else
   Change_ALL
 fi
 
-## 调用用户自定义的diy.sh
+# ## 调用用户自定义的diy.sh
 # if [ "${EnableExtraShell}" = "true" ]; then
 #   if [ -f ${FileDiy} ]
 #   then
