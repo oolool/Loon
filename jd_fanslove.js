@@ -102,23 +102,23 @@ if ($.isNode()) {
 async function fansLove() {
   $.risk = false;
   await grantTokenKey();
-  await $.wait(1500)
+//   await $.wait(1500)
   await grantToken();
-  await $.wait(1500)
+//   await $.wait(1500)
   await getActCookie();
-  await $.wait(1500)
+//   await $.wait(1500)
   await getActInfo();
-  await $.wait(1500)
+//   await $.wait(1500)
   await getMyPing();
-  await $.wait(1500)
+//   await $.wait(1500)
   await getUserInfo();
-  await $.wait(1500)
+//   await $.wait(1500)
   await getActContent(false);
   if ($.actInfo.endTime > Date.now()) {
     if (!$.risk) {
-      await $.wait(1500)
+    //   await $.wait(1500)
       await getActContent(true);
-      await $.wait(1500)
+    //   await $.wait(1500)
       await getActContent(false);
       if (($.actorInfo.fansLoveValue + $.actorInfo.energyValue) >= $.actConfig.prizeScoreOne && $.actorInfo.prizeOneStatus === false) {
         await doTask('wxFansInterActionActivity/startDraw', `activityId=${$.ACT_ID}&uuid=${$.actorInfo.uuid}&drawType=01`);
