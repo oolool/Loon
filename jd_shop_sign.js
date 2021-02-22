@@ -87,25 +87,25 @@ async function start() {
 }
 
 function getShopToken() {
-        return new Promise(async resolve => {
-            $.get({url: `http://106.13.212.194/jd/activity/shopSign/getToken/`, timeout: 10000}, (err, resp, data) => {
-              try {
-                if (err) {
-                  console.log(`${JSON.stringify(err)}`)
-                  console.log(`${$.name} 店铺Token获取失败，请检查网路重试`)
-                } else {
-                  if (data) {
-                    console.log(`${$.name} 店铺Token获取成功.`)
-                    data = JSON.parse(data);
-                  }
-                }
-              } catch (e) {
-                $.logErr(e, resp)
-              } finally {
-                resolve(data);
-              }
-            })
-          })
+  return new Promise(async resolve => {
+    $.get({ url: `http://106.13.212.194/jd/activity/shopSign/getToken/`, timeout: 10000 }, (err, resp, data) => {
+      try {
+        if (err) {
+          console.log(`${JSON.stringify(err)}`)
+          console.log(`${$.name} 店铺Token获取失败，请检查网路重试`)
+        } else {
+          if (data) {
+            console.log(`${$.name} 店铺Token获取成功.`)
+            data = JSON.parse(data);
+          }
+        }
+      } catch (e) {
+        $.logErr(e, resp)
+      } finally {
+        resolve(data);
+      }
+    })
+  })
 }
 
 function getVenderId(item) {
