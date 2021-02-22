@@ -77,17 +77,6 @@ function Git_PullScripts {
   git fetch --all
   ExitStatusScripts=$?
   git reset --hard origin/master
-
-  ## 调用用户自定义的diy.sh
-  if [ "${EnableExtraShell}" = "true" ]; then
-    if [ -f ${FileDiy} ]
-    then
-      . ${FileDiy}
-    else
-      echo -e "${FileDiy} 文件不存在，跳过执行DIY脚本...\n"
-    fi
-  fi
-
   echo
 }
 
@@ -384,6 +373,17 @@ then
   Npm_Install
   Output_ListJsAdd
   Output_ListJsDrop
+
+  ## 调用用户自定义的diy.sh
+if [ "${EnableExtraShell}" = "true" ]; then
+  if [ -f ${FileDiy} ]
+  then
+    . ${FileDiy}
+  else
+    echo -e "${FileDiy} 文件不存在，跳过执行DIY脚本...\n"
+  fi
+fi
+
   Del_Cron
   Add_Cron
 else
