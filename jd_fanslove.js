@@ -154,17 +154,17 @@ function getActContent(doJob = false) {
             if (doJob) {
               console.log(`开始执行 ${$.actInfo.shopName} 的任务`);
               await doTask('wxFansInterActionActivity/followShop', `activityId=${$.ACT_ID}&uuid=${$.actorInfo.uuid}`);
-              await $.wait(5000);
+            //   await $.wait(5000);
               if ($.task1Sign && $.task1Sign.finishedCount === 0) {
                 await doTask('wxFansInterActionActivity/doSign', `activityId=${$.ACT_ID}&uuid=${$.actorInfo.uuid}`);
-                await $.wait(5000);
+                // await $.wait(5000);
               }
               if ($.task2BrowGoods && $.task2BrowGoods.finishedCount !== $.task2BrowGoods.upLimit) {
                 for (let vo of $.task2BrowGoods.taskGoodList) {
                   if (vo.finished === false) {
                     await doTask('wxFansInterActionActivity/doBrowGoodsTask', `activityId=${$.ACT_ID}&uuid=${$.actorInfo.uuid}&skuId=${vo.skuId}`);
                   }
-                  await $.wait(5000);
+                //   await $.wait(5000);
                 }
               }
               if ($.task3AddCart && $.task3AddCart.finishedCount !== $.task3AddCart.upLimit) {
@@ -172,23 +172,23 @@ function getActContent(doJob = false) {
                   if (vo.finished === false) {
                     await doTask('wxFansInterActionActivity/doAddGoodsTask', `activityId=${$.ACT_ID}&uuid=${$.actorInfo.uuid}&skuId=${vo.skuId}`);
                   }
-                  await $.wait(5000);
+                //   await $.wait(5000);
                 }
               }
               if ($.task4Share && $.task4Share.finishedCount !== $.task4Share.upLimit) {
                 for (let i = 0; i < $.task4Share.upLimit; i++) {
                   await doTask('wxFansInterActionActivity/doShareTask', `activityId=${$.ACT_ID}&uuid=${$.actorInfo.uuid}`);
-                  await $.wait(5000);
+                //   await $.wait(5000);
                 }
               }
               if ($.task5Remind && $.task5Remind.finishedCount !== $.task5Remind.upLimit) {
                 await doTask('wxFansInterActionActivity/doRemindTask', `activityId=${$.ACT_ID}&uuid=${$.actorInfo.uuid}`);
-                await $.wait(5000);
+                // await $.wait(5000);
               }
               if ($.task6GetCoupon && $.task6GetCoupon.finishedCount !== $.task6GetCoupon.upLimit) {
                 for (let i = 0; i < $.task6GetCoupon.taskCouponInfoList.length; i++) {
                   await doTask('wxFansInterActionActivity/doGetCouponTask', `activityId=${$.ACT_ID}&uuid=${$.actorInfo.uuid}&couponId=${$.task6GetCoupon.taskCouponInfoList[i].couponId}`);
-                  await $.wait(5000);
+                //   await $.wait(5000);
                 }
               }
               if ($.task7MeetPlaceVo && $.task7MeetPlaceVo.finishedCount !== $.task7MeetPlaceVo.upLimit) {
