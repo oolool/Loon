@@ -391,7 +391,7 @@ fi
 #   fi
 # fi
 
-function ExecDiy() {
+function ExecDiy {
   ## 调用用户自定义的diy.sh
   if [ "${EnableExtraShell}" = "true" ]; then
     if [ -f ${FileDiy} ]
