@@ -58,7 +58,7 @@ if ($.isNode()) {
         }
         continue
       }
-      await start()
+      start()
       num = 0
     }
   }
@@ -79,8 +79,8 @@ async function start() {
       num++;
       if (vender.code == 402) {continue;}
       await getActivityInfo(item.token, vender.data.venderId)
-      await signCollectGift(item.token, vender.data.venderId, activityId)
-      await shopSign(item, vender.data.venderId) 
+       signCollectGift(item.token, vender.data.venderId, activityId)
+       shopSign(item, vender.data.venderId) 
     }
   }
   // await showMsg();
