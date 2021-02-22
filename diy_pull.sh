@@ -371,9 +371,9 @@ then
   [ -d ${ScriptsDir}/node_modules ] && Notify_Version
   Diff_Cron
   Npm_Install
+  ExecDiy
   Output_ListJsAdd
   Output_ListJsDrop
-  ExecDiy
   Del_Cron
   Add_Cron
 else
