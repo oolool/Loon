@@ -372,8 +372,8 @@ if [[ ${ExitStatusShell} -eq 0 ]]; then
   [ -d ${ScriptsDir}/.git ] && Git_PullScripts || Git_CloneScripts
   [ -d ${Scripts2Dir}/.git ] && Git_PullScripts2 || Git_CloneScripts2
   cp -f ${Scripts2Dir}/jd_*.js ${ScriptsDir}
-  cp -rf ${Scripts2Dir}/diy_pull.sh ${ConfigDir}
-  cp -rf ${Scripts2Dir}/config.sh.sample ${ConfigDir}/config.sh.sample
+  cp -f ${Scripts2Dir}/diy_pull.sh ${ConfigDir}
+  cp -f ${Scripts2Dir}/config.sh.sample ${ConfigDir}/config.sh.sample
 fi
 
 ## 执行各函数
