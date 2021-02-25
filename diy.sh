@@ -19,7 +19,7 @@ function clearCode {
 
 function updateCodeUrl {
     sed -i "s|http://jd.turinglabs.net/api/v2/jd/farm/read|http://106.13.212.194/jd/code/read/farm|" "$SCRIPTS_DIR/jd_fruit.js"
-    sed -i "s|http://jd.turinglabs.net/api/v2/jd/ddfactory/read|http://106.13.212.194/jd/code/read/ddfactory|" "$SCRIPTS_DIR/jd_jdfactory"
+    sed -i "s|http://jd.turinglabs.net/api/v2/jd/ddfactory/read|http://106.13.212.194/jd/code/read/ddfactory|" "$SCRIPTS_DIR/jd_jdfactory.js"
     sed -i "s|http://jd.turinglabs.net/api/v2/jd/jxfactory/read|http://106.13.212.194/jd/code/read/jxfactory|" "$SCRIPTS_DIR/jd_dreamFactory.js"
     sed -i "s|http://jd.turinglabs.net/api/v2/jd/pet/read|http://106.13.212.194/jd/code/read/pet|" "$SCRIPTS_DIR/jd_pet.js"
     sed -i "s|http://jd.turinglabs.net/api/v2/jd/sgmh/read|http://106.13.212.194/jd/code/read/sgmh|" "$SCRIPTS_DIR/jd_sgmh.js"
