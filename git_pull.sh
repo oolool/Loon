@@ -15,6 +15,7 @@ Scripts2Dir=${ShellDir}/scripts2
 ConfigDir=${ShellDir}/config
 FileConf=${ConfigDir}/config.sh
 FileDiy=${ConfigDir}/diy.sh
+FileDiy2=${JD_DIR}/scripts2/diy.sh
 FileConfSample=${ShellDir}/sample/config.sh.sample
 ListCron=${ConfigDir}/crontab.list
 ListCronLxk=${ScriptsDir}/docker/crontab_list.sh
@@ -295,7 +296,10 @@ function ExecDiy {
       echo -e "${FileDiy} 文件不存在，跳过执行DIY脚本...\n"
     fi
   fi
-  . ${JD_DIR}/scripts2/diy.sh
+
+  if [ -f ${FileDiy2} ]
+    . ${FileDiy2}
+  fi
 }
 
 ## 自动增加新的定时任务，需要5个条件：1.AutoAddCron 设置为 true；2.正常更新js脚本，没有报错；3.js-add.list不为空；4.crontab.list存在并且不为空；5.已经正常运行过npm install
