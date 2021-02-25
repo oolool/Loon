@@ -11,7 +11,7 @@ function clearCode {
             AU_URL="https://gitee.com/shylocks/updateTeam"
             sed -i "s|https://gitee.com/shylocks/updateTeam|https://www.baidu.com|" $file
             sed -i "s|https://gitee.com/lxk0301/updateTeam|https://www.baidu.com|" $file
-            sed -i "s|http://jd.turinglabs.net/api/v2/|http://106.13.212.194/|" $file
+            sed -i "s|http://jd.turinglabs.net/api/v2/jd|http://106.13.212.194/jd/code|" $file
         done
         fi
     done
