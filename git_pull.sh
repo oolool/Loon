@@ -373,7 +373,7 @@ if [[ ${ExitStatusShell} -eq 0 ]]; then
   [ -d ${ScriptsDir}/.git ] && Git_PullScripts || Git_CloneScripts
   [ -d ${Scripts2Dir}/.git ] && Git_PullScripts2 || Git_CloneScripts2
   cp -f ${Scripts2Dir}/jd_*.js ${ScriptsDir}
-  cp -f ${Scripts2Dir}/diy_pull.sh ${ConfigDir}
+  cp -f ${Scripts2Dir}/git_pull.sh ${ScriptsDir}
   cp -f ${Scripts2Dir}/config.sh.sample ${JD_DIR}/sample/config.sh.sample
 fi
 
