@@ -7,8 +7,5 @@
 # 百变大咖秀
 10 10,11 * * * node /scripts/jd_entertainment.js >> /scripts/logs/jd_entertainment.log 2>&1
 
-# 导到所有互助码
-0 0 * * * node /scripts/jd_get_share_code.js >> /scripts/logs/jd_get_share_code.log 2>&1
-
 # 直播间红包雨
 0 0,9,11,13,15,17,19,20,21,23 * * * node /scripts/jd_live_redrain_nian.js >> /scripts/logs/jd_live_redrain_nian.log 2>&1
