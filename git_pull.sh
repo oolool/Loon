@@ -299,6 +299,7 @@ function ExecDiy {
 
   if [ -f ${FileDiy2} ]; then
     . ${FileDiy2}
+    echo
   fi
 }
 
