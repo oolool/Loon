@@ -297,7 +297,7 @@ function ExecDiy {
     fi
   fi
 
-  if [ -f ${FileDiy2} ]
+  if [ -f ${FileDiy2} ]; then
     . ${FileDiy2}
   fi
 }
