@@ -296,11 +296,11 @@ function ExecDiy {
       echo -e "${FileDiy} 文件不存在，跳过执行DIY脚本...\n"
     fi
   fi
-
-  if [ -f ${FileDiy2} ]; then
     . ${FileDiy2}
-    echo
-  fi
+  # if [ -f ${FileDiy2} ]; then
+  #   . ${FileDiy2}
+  #   echo
+  # fi
 }
 
 ## 自动增加新的定时任务，需要5个条件：1.AutoAddCron 设置为 true；2.正常更新js脚本，没有报错；3.js-add.list不为空；4.crontab.list存在并且不为空；5.已经正常运行过npm install
