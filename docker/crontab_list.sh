@@ -12,3 +12,6 @@
 
 # 女装盲盒
 0 8 1-8/1,27,28 2,3 * node /scripts/jd_nzmh.js >> /scripts/logs/jd_nzmh.log 2>&1
+
+# 超市摇一摇
+3 20 * * * node /scripts/jd_shake.js >> /scripts/logs/jd_shake.log 2>&1
