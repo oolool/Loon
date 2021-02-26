@@ -211,6 +211,49 @@ function getJdFactory() {
     );
   })
 }
+
+function getCash() {
+  return new Promise((resolve) => {
+    $.get(cashTaskUrl("cash_mob_home",), async (err, resp, data) => {
+      try {
+        if (err) {
+          console.log(`${JSON.stringify(err)}`)
+          console.log(`${$.name} API请求失败，请检查网路重试`)
+        } else {
+          if (safeGet(data)) {
+            data = JSON.parse(data);
+            if(data.code === 0 && data.data.result){
+              console.log(`【账号${$.index}（${$.nickName || $.UserName}）领现金】${data.data.result.inviteCode}`);
+              sendCode('jdcash', data.data.result.inviteCode)
+            }
+          }
+        }
+      } catch (e) {
+        $.logErr(e, resp)
+      } finally {
+        resolve(data);
+      }
+    })
+  })
+}
+
+function cashTaskUrl(functionId, body = {}) {
+  const JD_CASH_API_HOST = 'https://api.m.jd.com/client.action';
+  return {
+    url: `${JD_CASH_API_HOST}?functionId=${functionId}&body=${escape(JSON.stringify(body))}&appid=CashRewardMiniH5Env&appid=9.1.0`,
+    headers: {
+      'Cookie': cookie,
+      'Host': 'api.m.jd.com',
+      'Connection': 'keep-alive',
+      'Content-Type': 'application/json',
+      'Referer': 'http://wq.jd.com/wxapp/pages/hd-interaction/index/index',
+      'User-Agent': $.isNode() ? (process.env.JD_USER_AGENT ? process.env.JD_USER_AGENT : (require('./USER_AGENTS').USER_AGENT)) : ($.getdata('JDUA') ? $.getdata('JDUA') : "jdapp;iPhone;9.2.2;14.2;%E4%BA%AC%E4%B8%9C/9.2.2 CFNetwork/1206 Darwin/20.1.0"),
+      'Accept-Language': 'zh-cn',
+      'Accept-Encoding': 'gzip, deflate, br',
+    }
+  }
+}
+
 function getJxFactory(){
   const JX_API_HOST = "https://m.jingxi.com";
 
@@ -705,6 +748,7 @@ async function getShareCode() {
   await getJdZZ()
   await getJoy()
   await getSgmh()
+  await getCash()
   console.log(`======账号${$.index}结束======\n`)
 }
 

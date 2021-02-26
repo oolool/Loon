@@ -28,6 +28,7 @@ function updateCodeUrl {
     sed -i "s|http://jd.turinglabs.net/api/v2/jd/sgmh/read|http://106.13.212.194/jd/code/read/sgmh|" "$SCRIPTS_DIR/jd_sgmh.js"
     sed -i "s|http://jd.turinglabs.net/api/v2/jd/bean/read|http://106.13.212.194/jd/code/read/bean|" "$SCRIPTS_DIR/jd_plantBean.js"
     sed -i "s|https://code.chiang.fun/api/v1/jd/jdcrazyjoy/read|http://106.13.212.194/jd/code/read/crazyJoy|" "$SCRIPTS_DIR/jd_crazy_joy.js"
+    sed -i "s|https://code.chiang.fun/api/v1/jd/jdcash/read|http://106.13.212.194/jd/code/read/jdcash|" "$SCRIPTS_DIR/jd_cash.js"
     echo "助力池链接替换完成!"
 }
 
