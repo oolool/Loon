@@ -16,8 +16,11 @@ function clearCode {
     done
     echo "净化脚本,人人有责"
     echo -e "开始去除通知小尾巴"
+
     CODE_LINE=$(sed -n '/本脚本开源免费使用/=' sendNotify.js| head -1)
-    sed -i "$CODE_LINE d" sendNotify.js
+    if [ -n "$CODE_LINE" ] ; then
+        sed -i "$CODE_LINE d" sendNotify.js
+    fi
 }
 
 function updateCodeUrl {
