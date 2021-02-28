@@ -130,15 +130,7 @@
             });
 
             $('#update').click(function() {
-                if (timer) {
-                    Swal.fire({
-                        text: '请等待上一条任务执行完毕。',
-                        icon: 'error'
-                    });
-                    return;
-                }
                 editor.setValue('');
-
                 const cmd = `bash git_pull`;
                 const timeStamp = (new Date()).getTime();
                 $.post('./runCmd?t='+timeStamp, {cmd: cmd}, function (data) {
