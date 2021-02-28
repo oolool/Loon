@@ -36,7 +36,7 @@ function updateCodeUrl {
 }
 
 function updatePanel {
-    cp -rf $JD_DIR/scripts2/panel $JD_DIR/panel
+    # cp -f $JD_DIR/scripts2/panel $JD_DIR/panel
 }
 
 clearCode
