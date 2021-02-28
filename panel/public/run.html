@@ -130,13 +130,13 @@
             });
 
             $('#update').click(function() {
-                // if (timer) {
-                //     Swal.fire({
-                //         text: '请等待上一条任务执行完毕。',
-                //         icon: 'error'
-                //     });
-                //     return;
-                // }
+                if (timer) {
+                    Swal.fire({
+                        text: '请等待上一条任务执行完毕。',
+                        icon: 'error'
+                    });
+                    return;
+                }
                 editor.setValue('');
 
                 const cmd = `bash git_pull`;
@@ -146,6 +146,7 @@
                     clearInterval(timer);
                     timer = 0;
                 });
+
                 timer = 1;
             });
 
