@@ -136,10 +136,7 @@
                 $.post('./runCmd?t='+timeStamp, {cmd: cmd}, function (data) {
                     editor.setValue(data.msg);
                     clearInterval(timer);
-                    timer = 0;
                 });
-
-                timer = 1;
             });
 
 
