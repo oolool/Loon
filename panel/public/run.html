@@ -36,7 +36,6 @@
                 <button id="wrap" title="切换换行">切换换行</button>
                 <br/>
                 <button id="jd_list" class="cmd-btn" title="列出脚本">列出脚本</button>
-                <button id="update" class="cmd-btn" title="更新脚本">更新脚本</button>
                 <button id="jd_bean_sign" class="cmd-btn" title="京豆签到">京豆签到</button>
                 <button id="jd_fruit" class="cmd-btn" title="东东农场">东东农场</button>
                 <button id="jd_dreamFactory" class="cmd-btn" title="京喜工厂">京喜工厂</button>
@@ -59,7 +58,7 @@
     </div>
     <script>
         $(document).ready(function () {
-            var timer=0;
+            var timer = 0;
             var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
                 lineNumbers: true,
                 lineWrapping: false,
@@ -71,7 +70,7 @@
             });
 
             $('.cmd-btn').click(function() {
-                if (timer) {
+                if (timer == 0) {
                     Swal.fire({
                         text: '请等待上一条任务执行完毕。',
                         icon: 'error'
@@ -108,7 +107,7 @@
                     return;
                 }
 
-                if (timer) {
+                if (timer == 0) {
                     Swal.fire({
                         text: '请等待上一条任务执行完毕。',
                         icon: 'error'
@@ -128,36 +127,7 @@
 
                 timer = 1;
             });
-            
-            $('#update').click(function(){
-                if (timer) {
-                    Swal.fire({
-                        text: '请等待上一条任务执行完毕。',
-                        icon: 'error'
-                    });
-                    return;
-                }
-                editor.setValue('');
-                const cmd = `bash git_pull`;
-                const timeStamp = (new Date()).getTime();
-                $.post('./runCmd?t=' + timeStamp, {cmd: cmd, delay: 1000}, function (data) {
-                    editor.setValue(data.msg);
 
-                    //将光标和滚动条设置到文本区最下方
-                    editor.execCommand('goDocEnd');
-
-                    clearInterval(timer);
-                    timer = 0;
-                });
-
-                timer = 1;
-                // 1s后开始查日志
-                setTimeout(() => {
-                    getLogInterval(jdScript);
-                }, 1000);
-
-                return false;
-            });
 
             $('#runCmd').click(function() {
                 const jdScript = $('#jdScript').val();
@@ -169,7 +139,7 @@
                     return;
                 }
 
-                if (timer) {
+                if (timer == 0) {
                     Swal.fire({
                         text: '请等待上一条任务执行完毕。',
                         icon: 'error'
